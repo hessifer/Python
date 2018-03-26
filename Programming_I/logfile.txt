@@ -1,0 +1,5 @@
+2018-03-19T15:33:36.8943Z customer_id=parrot task=generate_report report_id=ed946a58-be4c-416d-8614-234893141742 milestone=start result=200
+2018-03-19T15:33:42.1039Z customer_id=cardinal task=delete_report report_id=b1fa5a81-18c8-4f6c-896c-6fe8a525b647 milestone=start result=200
+2018-03-19T15:33:42.1355Z customer_id=cardinal task=delete_report report_id=b1fa5a81-18c8-4f6c-896c-6fe8a525b647 milestone=end result=200
+2018-03-19T15:37:12.4842Z customer_id=parrot task=generate_report report_id=ed946a58-be4c-416d-8614-234893141742 milestone=end result=200
+2018-03-19T15:37:12.4842Z customer_id=canary task=generate_report report_id=1dd56aed-479a-40dd-b510-dd02ddf817e1 milestone=end result=500
