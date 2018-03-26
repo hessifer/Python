@@ -35,35 +35,31 @@ def calc_avg_task_time(file_handle):
             elif id in data_dict and milestone == 'end':
                 # just update end milestone data in data_dict
                 data_dict[id].update(time_end=date_time_stamp)
+
+                t_start = datetime.datetime.strptime(data_dict[id].get(
+                    'time_start'), "%Y-%m-%dT%H:%M:%S.%fZ")
+                t_stop = datetime.datetime.strptime(data_dict[id].get(
+                    'time_end'), "%Y-%m-%dT%H:%M:%S.%fZ")
+                td = t_stop - t_start
+                ts = td.total_seconds()
+                td_total += ts
             else:
                 pass
-        # calculate and update time delta in seconds to data_dict
-        # keep track of the total time delta in seconds
-        for key, value in data_dict.items():
-            t_start = datetime.datetime.strptime(value.get(
-                'time_start'), "%Y-%m-%dT%H:%M:%S.%fZ")
-            t_stop = datetime.datetime.strptime(value.get(
-                'time_end'), "%Y-%m-%dT%H:%M:%S.%fZ")
-            td = t_stop - t_start
-            ts = td.total_seconds()
-            # no need to store this if we do not keep it around
-            # data_dict[key].update(td=ts)
-            td_total += ts
         return td_total / len(data_dict.keys())
 
-    # TODO: add argparse functionality so that user can
-    # specify logfile.
-    # TODO: make sure we support the log file
+# TODO: add argparse functionality so that user can
+# specify logfile.
+# TODO: make sure we support the log file
 
-    # main function
-    def main():
-        msg = "Average time to complete a successful operation: {} seconds."
+# main function
+def main():
+    msg = "Average time to complete a successful operation: {} seconds."
 
-        # read each line of the file into a buffer
-        with open('logfile.txt', 'r') as fh:
-            data = fh.readlines()
+    # read each line of the file into a buffer
+    with open('logfile.txt', 'r') as fh:
+        data = fh.readlines()
 
-        print(msg.format(calc_avg_task_time(data)))
+    print(msg.format(calc_avg_task_time(data)))
 
 
 if __name__ == '__main__':
