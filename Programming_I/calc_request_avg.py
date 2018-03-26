@@ -45,7 +45,7 @@ def calc_avg_task_time(file_handle):
                 td_total += ts
             else:
                 pass
-        return td_total / len(data_dict.keys())
+    return td_total / len(data_dict.keys())
 
 # TODO: add argparse functionality so that user can
 # specify logfile.
