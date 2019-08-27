@@ -12,4 +12,4 @@ elif len(prices) > 3:
 else:
     discount = total * .10
 
-print(round(discount,1))
+print(round(discount, 1))
