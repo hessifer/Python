@@ -1,3 +1,6 @@
 
 /target/
 **/*.rs.bk
+*.suo
+/python_learning_lab/functions/.vs/ProjectSettings.json
+*.sqlite
