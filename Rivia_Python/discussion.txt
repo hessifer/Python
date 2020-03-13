@@ -1,0 +1,430 @@
+Agenda:
+    1. Review coding exercise from last week (reverse a name)
+    2. Code solutions to the below listed tasks (peer review)
+    
+************* TASKS ************
+1. Write a program to prompt the user for their first name and 
+last name then display the full name with each odd element 
+capitalized and each even element lowercase.
+
+2. Write a program that parses a line of text (input from user) 
+and returns all the unique vowels found.
+
+3. Given the participants' score sheet for your University Sports
+ Day, you are required to find the runner-up score. You are given
+ scores. Store them in a list and find the score of the runner-up
+ and display to screen.
+
+4. Given space-separated integers as input, create
+ a tuple (t) of those  integers. Then compute and print the result of
+ hash(t).
+
+Note: hash() is one of the functions in the __builtins__ module, 
+so it need not be imported.
+
+5. You work for the UW and have been tasked with identifing how many students enrolling
+speak both english and french. Using the set data type display to the screen the number
+of students who speak both english and french.
+
+6. Write a function that parses the file /etc/passwd and returns a unique 
+set of users. Handle any errors that may occurr and then test your funciton
+works as expected.
+
+7. Run flake8 against each program above and address any issues found.
+> pip3 install flake8
+> flake8 task6.py
+
+************** END **************
+
+Miles:
+    
+name = "Miles"  
+reversed_name = []
+index = len(name) - 1
+
+while index >= 0:
+    reversed_name.append(name[index]) 
+    index = index - 1
+print(''.join(reversed_name))
+
+
+
+
+
+
+first_name = input('Please Enter First Name: ')
+last_name = input('Please Enter Last Name: ')
+
+
+        if i % 2 == 0:
+            first_name[i].lower()
+            
+            
+            
+
+vowels = ["a","e","i","o","u"]
+user_input = input("Please enter some text: ")
+
+for i in user_input:
+    if i in vowels:
+        print(i, end="")
+
+***********************************
+    
+Camilo:
+    
+def main():
+    user_menu()
+
+
+def user_menu ():
+    print("\033[1;32;40m ***************** REVERSED NAME MENU *********************")
+    user_selection = input((F"""\033[0;37;40m
+        A: reversed_name_01. It uses reversed funtion
+        B: reversed_name_02. It uses len function
+
+        Select from the list above which function you will execute: """)).upper()
+
+    if user_selection == "A":
+        username = input("\033[1;32;40m Whats your name: ")
+        reversed_name = reversed_name_01(username)
+    elif user_selection == "B":
+        username = input("\033[1;32;40m Whats your name: ")
+        reversed_name = reversed_name_01(username)
+    else:
+        print("\033[1;31;40m You must select A or B" )
+        user_selection = user_menu()
+
+
+def reversed_name_01(input_name):
+    print(f"Your name backwards is: ", end=' ')
+    for i in reversed(input_name):
+        print(f"{i}", end='')
+    print()
+
+def reversed_name_02(input_name):  
+    reversed_string = ""
+
+    for i in range(len(input_name) - 1, -1, -1):  
+        reversed_string = reversed_string + input_name[i]
+    return reversed_string
+    
+
+
+if __name__ == "__main__":
+    main()
+    
+****************
+
+def main():
+
+    first_name = input("First enter your first name: ")
+    # last_name = input("Enter your last name: ")
+    
+    for i in first_name:
+        if i % 2 != 0:
+            first_name[i] = first_name[i].capitalize()
+        else:
+            first_name[i] = first_name[i]
+
+
+if __name__ == "__main__":
+    main()
+    
+************************************
+
+Andrew:
+
+def upper_lower():
+    f = input("Enter your first name: ")
+    l = input("Enter your last name: ")
+    full = f + l
+    i = 0
+    newfull = ''
+    while i < len(full) - 1:
+        if i == 0:
+            newfull += full[i].lower()
+        if i % 2 == 0:
+            newfull += full[i].lower()
+        else: 
+            newfull += full[i].upper()
+        i += 1
+    return newfull
+
+def vowelFind():
+    voewls = ['a', 'e', 'i', 'o', 'u']
+    text = input("enter your text: ")
+    uniques = set()
+    for i in text:
+        if i in voewls:
+            uniques.add(i)
+
+def runner_up(scores):
+    scorelist = []
+    for i in scores:
+        scorelist.append(i)
+    scorelist.remove(max(scorelist))
+    print(max(scorelist))
+    
+def hashprinter(input):
+    output = tuple(map(int, input.split(', ')))
+    print(hash(output))
+
+************************************
+
+Pat:
+    
+def reverse_string(input_string):
+    l = len(input_string) - 1 
+    newstr = ''
+    for i in range(l, -1, -1):
+        #print(i, input_string[i])
+        newstr = newstr + input_string[i]
+    return newstr   
+
+if __name__ == '__main__':
+    print(reverse_string('Foobar'))
+    
+
+## Even / Odd Case Task 1
+def evenoddcase():
+    fname = input("Please enter your first name: ")
+    lname = input("Please enter your last name:  ")
+
+    fullname = "%s %s" % (fname, lname)
+    newfullname = []
+    count = 0
+    for c in fullname:
+        print(c.lower() if count %2 == 0 else c.upper(), end='')
+        count += 1
+    return(''.join(newfullname))
+
+if __name__ == "__main__":
+    print(evenoddcase())
+
+## Only Vowels Task 2
+def onlyvowels():
+    myline = input("Give me a line of text: ")
+
+    vowels = []
+    for v in myline:
+        if v in ['a', 'e', 'i', 'o', 'u']:
+            vowels.append(v)
+    return(set(vowels))
+    
+if __name__ == "__main__":
+    print(onlyvowels())
+
+## Runner Up Score Task 3
+def runnerup():
+    scores = []
+    while (True):
+        score = input("Please enter score [Q] to quit: ")
+        try:
+            if (score.lower()) == 'q':
+                break
+        except TypeError:
+            pass
+        scores.append(int(score))
+    runner_up = sorted(scores, reverse=True)
+    print("Runner up score was: %s" % runner_up[1])
+
+if __name__ == "__main__":
+    print(runnerup())
+
+## Space Separated Task 4
+def space_separated():
+    my_ints = input("Enter list of space separated integers: ")
+    res = tuple(map(int, my_ints.split(' ')))
+    return hash(my_ints)
+
+if __name__ == "__main__":
+    print(space_separated())
+    
+*************************************
+
+Charles:
+    
+def rev(name):
+    ptr = len(name) - 1
+    letters = []
+
+    while ptr >= 0:
+        letters.append(name[ptr])
+        ptr -= 1
+    return "".join(letters)
+
+
+def rev2(name):
+    res = ''
+    for c in name:
+        res = c + res
+    
+    return res
+
+
+def rev3(name):
+    return name[::-1]
+   
+
+print(rev('miles'))
+print(rev2('charles'))
+print(rev3('pat'))
+
+task1:
+
+"""
+Write a program to prompt the user for their first name and 
+last name then display the full name with each odd element 
+capitalized and each even element lowercase.
+"""
+
+def main():
+    first_name = input('Please enter your first name: ')
+    last_name = input('Please enter your last name: ')
+
+    while True:
+        if not validate_name(first_name):
+            first_name = input('Please enter your first name: ')
+        elif not validate_name(last_name):
+            last_name = input('Please enter your last name: ')
+        else:
+            break
+    
+    full_name = first_name + " " + last_name
+    for i, c in enumerate(full_name):
+        if i % 2 == 0:
+            print(f"{c.lower()}", end='')
+        else:
+            print(f"{c.upper()}", end='')
+    print()
+
+
+def validate_name(name):
+    return name.isalpha()
+
+if __name__ == '__main__':
+    main()
+    
+    
+task2:
+    
+"""
+Write a program that parses a line of text (input from user) 
+and returns all the unique vowels found.
+"""
+
+def main():
+    VOWELS = ['a', 'e', 'i', 'o', 'u']
+    text = input('Please enter a line of text: ')
+    unique_vowels = set()
+
+    for c in text:
+        if c in VOWELS:
+            unique_vowels.add(c)
+    print(f"{' '.join(unique_vowels)}")
+
+
+if __name__ == '__main__':
+    main()
+    
+task3:
+    
+"""
+Given the participants' score sheet for your University Sports
+Day, you are required to find the runner-up score. You are given
+a list of scores. Determine the score of the runner-up
+and display to screen.
+
+NOTE: You can use a built-in function
+"""
+
+def main():
+    input_scores = input('Please enter the scores separated by spaces here: ').split()
+    
+    try:
+        int_scores = list(map(int, input_scores))
+    except ValueError as ve:
+        print(f"{ve}")
+    else:
+        print(f"The runner up score was: {get_runner_up(int_scores)}")
+
+
+def get_runner_up(scores):
+    scores.sort()
+    return scores[-2]
+
+
+if __name__ == '__main__':
+    main()
+    
+task4:
+    
+"""
+Given space-separated integers as input, create
+ a tuple (t) of those  integers. Then compute and print the result of
+ hash(t).
+
+Note: hash() is one of the functions in the __builtins__ module, 
+so it need not be imported.
+"""
+
+def main():
+    numbers = input('Please enter your numbers here: ').split()
+
+    try:
+        results = tuple(map(int, numbers))
+    except ValueError as ve:
+        print(f"{ve}")
+    else:
+        print(hash(results))
+
+
+if __name__ == '__main__':
+    main()
+    
+task5:
+    
+"""
+You work for LSU and have been tasked with identifing how many students enrolling
+speak both english and french. Using the set data type display to the screen the number
+of students who speak both english and french.
+"""
+
+def main():
+    english_speakers = {1, 2, 3, 4}
+    french_speakers = {6, 10, 3, 9}
+    dual_speakers = english_speakers.intersection(french_speakers)
+
+    print(f"There are {len(dual_speakers)} student(s) enrolling that speak both English and French.")
+
+
+if __name__ == '__main__':
+    main()
+
+
+task6:
+
+"""
+Write a function that parses the file /etc/passwd and returns a unique 
+set of users. Handle any errors that may occurr and then test your funciton
+works as expected.
+"""
+
+def main():
+    for i in get_unique_users('/etc/passwd'):
+        print(f"{i}")
+
+
+def get_unique_users(file):
+    users = set()
+
+    with open(file) as fh:
+        for line in fh:
+            users.add(line.split(':')[0])
+    return users
+        
+
+
+if __name__ == '__main__':
+    main()

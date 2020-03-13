@@ -1,0 +1,28 @@
+1. Write a program to prompt the user for their first name and 
+last name then display the full name with each odd element 
+capitalized and each even element lowercase.
+
+2. Write a program that parses a line of text (input from user) 
+and returns all the unique vowels found.
+
+3. Given the participants' score sheet for your University Sports
+ Day, you are required to find the runner-up score. You are given
+ scores. Store them in a list and find the score of the runner-up
+ and display to screen.
+
+4. Given space-separated integers as input, create
+ a tuple (t) of those  integers. Then compute and print the result of
+ hash(t).
+
+Note: hash() is one of the functions in the __builtins__ module, 
+so it need not be imported.
+
+5. You work for LSU and have been tasked with identifing how many students enrolling
+speak both english and french. Using the set data type display to the screen the number
+of students who speak both english and french.
+
+6. Write a function that parses the file /etc/passwd and returns a unique 
+set of users. Handle any errors that may occurr and then test your funciton
+works as expected.
+
+7. Run flake8 against each program above and address any issues found.
