@@ -1,0 +1,587 @@
+****** Start ******
+1. Write a program to prompt the user for their first name and 
+last name then display the full name with each odd element 
+capitalized and each even element lowercase.
+
+2. Write a program that parses a line of text (input from user) 
+and returns all the unique vowels found.
+
+3. Given the participants' score sheet for your University Sports
+ Day, you are required to find the runner-up score. You are given
+ scores. Store them in a list and find the score of the runner-up
+ and display to screen.
+
+4. Given space-separated integers as input, create
+ a tuple (t) of those  integers. Then compute and print the result of
+ hash(t).
+
+Note: hash() is one of the functions in the __builtins__ module, 
+so it need not be imported.
+
+5. You work for LSU and have been tasked with identifing how many students enrolling
+speak both english and french. Using the set data type display to the screen the number
+of students who speak both english and french.
+
+6. Write a function that parses the file /etc/passwd and returns a unique 
+set of users. Handle any errors that may occurr and then test your funciton
+works as expected.
+
+7. Run flake8 against each program above and address any issues found.
+
+******* End *******
+
+git: https://github.com/hessifer/Python/tree/master/Rivia_Python
+
+Agenda:
+1. Review task 6
+2. Discuss Exception Handling
+3. Cover str format()
+4. Read / Write to files
+5. General overview / challenges
+6. Dictionaries
+7. *args / **kwargs
+8. Intro to Classes/Objects __init__()
+9. Docstrings
+10. Type Annotations
+
+
+****************************************
+
+Task 6:
+
+Camilo:
+
+def main():
+
+    # The available options are "w" for write, "r" for read, and "a" for append
+    pswd_file = open("/etc/passwd", "r")
+    unique_users = set()
+    for line in pswd_file:
+        columns = line.split(":")  
+        unique_users.add(columns[0])
+    pswd_file.close()
+
+    for user in unique_users:
+        print(f"user: {user}")
+
+
+if __name__ == "__main__":
+    main()
+    
+Pat:
+    
+def unique_passwd():
+    users = set()
+    with open('/etc/passwd', 'r') as infile:
+        lines = infile.readlines()
+        for line in lines:
+            try:
+                entry = line.split(":")[0]
+                users.add(entry)
+            except IndexError:
+                pass
+    return(users)
+
+if __name__ == "__main__":
+    print(unique_passwd())
+    
+Task 7:
+"""
+Create a program that ask the user for a file to read from. If that file
+does not exist handle the proper exception, by displaying a message
+'ERROR: File does not exist.'
+If the file exist, display the contents.
+"""
+
+
+def main():
+
+
+    path_file = input("Enter file name: ")
+    try:
+        open_file = open(path_file, "r") 
+    except FileNotFoundError as fe:
+        print(f"ERROR. Verify the name of the file - {fe}")
+    else:
+        # read the file
+        print("read the file")
+        for line in open_file:
+            print(line)
+        open_file.close()
+    
+
+if __name__ == "__main__":
+    main()
+    
+Task8:
+"""
+Write a simple function that builds a greeting by taking in a name:
+str argument and
+returns a custom greeting. Be sure to use the .format() method.
+"""
+
+
+def main():
+    user_name = input("Pleas enter your name: ")
+    welcome_message = "welcome today!!"
+    print("{0}  {1}!".format(user_name, welcome_message))
+
+
+if __name__ == "__main__":
+    main()
+
+
+Task 9 (still working...)
+
+"""
+Task9: Write a simple method that writes the text hello world to
+a file named message.txt.
+If the file exists, overwrite it.
+"""
+
+
+def main():
+    # path_file = input("Enter file name: ", default="message.txt")
+    path_file = input("Enter file name: ")
+    try:
+        open_file = open(path_file, "w") 
+    except FileNotFoundError as fe:
+        print(f"ERROR. Verify the name of the file - {fe}")
+    else:
+        open_file.write("hello world")
+        open_file.close()
+
+
+if __name__ == "__main__":
+    main()
+    
+********************
+    
+Charles:
+
+"""
+Write a function that parses the file /etc/passwd and returns a unique
+set of users. Handle any errors that may occurr and then test your funciton
+works as expected.
+"""
+
+
+def main():
+    for i in get_unique_users('/etc/passwd'):
+        print(f"{i}")
+
+
+def get_unique_users(file):
+    users = set()
+
+    with open(file) as fh:
+        for line in fh:
+            users.add(line.split(':')[0])
+    return users
+
+
+if __name__ == '__main__':
+    main()
+    
+************* Reading / Writing to Files ******************
+# basic non recommend way to open a file
+file_name = "/etc/passwd"
+f = open(file_name)
+# f_contents = f.read()
+for line in f:
+    print(line.strip())
+
+# important to close file when not using context manager
+f.close()
+
+
+# let's use a context manager to handle common file operations
+with open(file_name) as fh:
+    for line in fh:
+        print(line.strip())
+
+# writing to a file using a context manager
+target_file = "golf_is_fun.txt"
+
+
+with open(target_file, 'w') as fh_w:
+    fh_w.write("Hook, Slice, and Sinker...\n")
+
+# appending data to an existing file using a context manager
+with open(target_file, 'a') as fh_a:
+    fh_a.write("A bad day of golf is better than a good day at work!\n")
+
+# ^^^Why does the target_file only contain two lines?
+
+# append data to an existing file or create it if it does not exist
+# using a context manager
+contacts_file = 'contacts.txt'
+
+with open(contacts_file, 'a+') as fh_a:
+    fh_a.write("Get Wrecked!!!\n")
+
+***************** END ******************
+
+******* String Formatting *******
+# string concatenation
+total_string = "Hello" + " " + "World!"
+print(total_string)
+
+# strings are immutable
+message = "Wow, this is great: "
+print(f"ID of Original Message Object: {id(message)}")
+name = "Charles"
+message = message + " " + name
+print(f"ID of Modified Message Object: {id(message)}")
+
+# NOTE: They are not the same object, as strings are immutable
+# Strings are a sequence of text (iterable)
+name = "Wolly World!"
+for c in name:
+    print(f"{c.upper()}")
+print()
+
+# display the last character of a string
+print(name[-1])
+
+# slice the string
+print(name[6:])
+
+# copy the string
+new_name = name[:]
+print(f"{new_name} with ID: {id(new_name)}")
+
+# reverse a string
+print(new_name[::-1])
+
+# print the even number characters in a string
+message5 = "Where is Kinney?"
+print(message5[0:len(message5)-1:2])
+print(message5[::2]) # shorter method
+
+# Some of the commonly used methods for string objects
+# len(), type(), id()
+# capitalize(), upper(), lower(), strip(), find(), replace()
+# split(), join()
+# import string
+
+from string import ascii_lowercase as al
+print(al)
+
+print()
+print()
+
+# Formatting Strings
+# concatenation method
+color = "yellow"
+print("Today the sky was " + color + ".")
+
+# comma method (adds space)
+print("Today the sky was", color + ".")
+
+# using format method
+print("Today the sky was {}.".format(color))
+
+age = 27
+name = "Charles"
+print("{1} is {0} today!".format(name, age))
+msg = "{} is {} today!".format(name, age)
+print(msg)
+
+# f string method
+print(f"Today the sky was {color}.") # <-- referred to as string interpolation
+
+# special characters
+# \ - escape special char that follows
+# \n - newline
+# \t - tab
+
+********* END *********
+
+Task7: Create a program that ask the user for a file to read from. If that file 
+does not exist handle the proper exception, by displaying a message 'ERROR: File does not exist.'
+If the file exist, display the contents.
+
+Task8: Write a simple function that builds a greeting by taking in a name: str argument and
+returns a custom greeting. Be sure to use the .format() method.
+
+
+*******************
+Miles:
+
+name = input('Please enter filename: ')
+try:
+    with open(name) as input_file:
+        content = input_file.read()
+    print(content)
+except FileNotFoundError:
+    print('ERROR: File does not exist')
+
+***********************
+Pat:
+
+def build_greeting():
+    """ Task 8 """
+    gr_name = input("Please to tell me your name: ")
+    print("Well, hello {}, so nice to meet you.".format(gr_name))
+
+
+if __name__ == "__main__":
+    build_greeting()
+
+************************
+Charles:
+
+def build_greeting(name: str) -> str:
+    '''Builds and returns a simple greeting.'''
+    return "{}, Python coding is so much fun!".format(name)
+
+
+def main():
+    '''Main entry of program.'''
+    name = 'Charles'
+    print(build_greeting(name))
+
+
+if __name__ == '__main__':
+    main()
+
+*********************
+Task9: Write a simple method that writes the text hello world to a file named message.txt.
+If the file exists, overwrite it.
+
+************************
+
+
+*** Pat ***
+def hw():
+    with open('message.txt', 'w') as nuke:
+        nuke.write('Hello World')
+
+
+if __name__ == "__main__":
+    hw()
+    
+### Miles ### 
+    
+def hello_world():
+    with open('message.txt', "w") as f:
+        f.write('Hello World\n')
+
+
+if __name__ == '__main__':
+    hello_world()
+
+
+********* Dictionaries / Tuples / Sets ********
+# https://docs.python.org/3/tutorial/datastructures.html
+# Lists mutable ordered iterable collections capable of storing disparate data types
+
+
+# Example1 of dictionary
+# dictionary - unordered mutable iterable collection
+example1 = {'name': 'charles', 'course': 'python', 'fav_food': 'red snapper'}
+
+# Example2 of dictionary
+example2 = {'bob': '123.456.7890',
+           'jill': '222.321.8765',
+           'mike': '435.876.2374'}
+
+# Example3 of dictionary
+example3 = {'a':
+               {
+                   'apple': 'a delicious fruit',
+                   'ant': 'an insect'
+               },
+            'b':
+               {
+                   'bad': 'of poor quality',
+                   'business': 'season 8 of GOT'
+               }
+           }
+
+
+# Display the value of name in example1
+print(f"Name: {example1.get('name')}")
+print(f"Name: {example1['name']}")
+
+# Display Jill's phone number from example2
+print(f"Jill's number: {example2.get('jill')}")
+
+# Display the definition of business in example3
+print(f"business: {example3.get('b').get('business')}")
+print(f"business: {example3['b']['business']}")
+
+# Display methods available for dictionary type
+# dir(dict)
+
+# Display help information for the method items() on a dictionary type
+# print(help(dict.items))
+
+# Example2 of dictionary
+example2 = {'bob': '123.456.7890',
+           'jill': '222.321.8765',
+           'mike': '435.876.2374'}
+
+# Display keys and values from example2
+print("\nKey / Value")
+for key, value in example2.items():
+    print(f"Key: {key}\tValue: {value}")
+
+# Display keys from example2
+print("\nKeys")
+for key in example2.keys():
+    print(f"Key: {key}")
+
+# Display values from example2
+print("\nValues")
+for value in example2.values():
+    print(f"Value: {value}")
+
+# Display the length of example2
+print(len(example2))
+
+
+# Tuples immutable ordered iterable collections capable of storing disparate data types
+print("\n\nTuples\n")
+random_tuple = ('first', 1, 2, 3, 4, 'hi there', 3.45)
+my_tuple = ('value1', 'value2', 'value3')
+single_value_tuple = 'single', # singleton
+empty_tuple = ()
+
+# Display last element of random_tuple
+print(f"Last element of random_tuple: {random_tuple[-1]}")
+
+# Display last portion of random_tuple
+print(f"Last portion of random_tuple: {random_tuple[(len(random_tuple) - 1) // 2 + 1:]}")
+
+# Display number of times the value 3 is in random_tuple
+print(f"Count of 3: {random_tuple.count(3)}")
+
+# Unpack values in my_tuple
+one, two, three = my_tuple
+print(f"One: {one}\nTwo: {two}\nThree: {three}")
+
+
+# Sets mutable unordered iterable collections caple of storing disparate data types of unique values
+print("\n\nSets\n")
+my_set = {1, 2, 3, 'python', 'linux', 3.45, True}
+
+# Loop over my_set and print the values and their type
+for v in my_set:
+    print(f"Value: {v}\t Type: {type(v)}\n")
+
+# Try and add a value that is already incldued in my_set
+my_set.add('python')
+print(my_set)
+
+
+************ *args / **kwargs *************
+# Function definition 
+# Make sure your names are descriptive
+# Your functions should be succint and 
+# stick to a particular task
+
+def say_hello():
+    print('Hello')
+
+# function with a single parameter
+def is_even(number):
+    return number % 2 == 0
+
+# funciton with two parameters
+def add_two_nums(num1, num2):
+    return num1 + num2
+
+# NOTE: if a function does not have a specifed return value
+# python returns None
+
+def example_return():
+    value = 1 + 1
+
+print(example_return())
+
+print()
+
+
+# NOTE: You should include a docstring at the top of
+# your function to provide information about your function
+def say_hi():
+    '''Greets the user with hi.'''
+    print('hi')
+
+# NOTE: function should not take in more than 3 or 4 arguments
+# function with a default value
+def display_greeting(greeting="Hello!"):
+    print(greeting)
+
+display_greeting()
+display_greeting("Sup") # <- override default value
+
+
+# function with regular argument and a default value argument (order matters)
+def better_greeting(name, greeting="Hello!"):
+    print(f"{greeting} {name}")
+
+first_name = 'Charles'
+better_greeting(first_name)
+better_greeting(first_name, "Wazzzzup!")
+
+# use pass by reference to see what happens to our list
+orig_list = [1, 2, 3]
+
+def test1(data_list):
+    print(data_list[0])
+    
+def test2(data_list):
+    data_list[0] = 5
+    print(data_list[0])
+    
+test1(orig_list)
+test2(orig_list)
+test1(orig_list)
+
+print()
+
+# use pass by copy to see what happens to our list
+the_list = [1, 2, 3]
+test1(the_list)
+test2(the_list[:])
+test1(the_list)
+
+
+print()
+
+# passing variable number of arguments to functions *args and **kwargs
+# *args - non-keyword variable-length of arguments
+def sum_these(*args):
+    '''Sum all the numbers passed and display it to the screen.'''
+    sum = 0
+    for i in args:
+        sum += i
+    print(sum)
+
+sum_these(2,3)
+sum_these(1,2,3,4,5,6,7,8,9)
+
+print()
+
+# **kwargs is used to pass keyworded, variable-length arguments (dictionary)
+def print_kwargs(**kwargs):
+    '''Display the keywords and their values to screen.'''
+    for key, value in kwargs.items():
+        print(f"Key: {key}\tValue: {value}")
+
+print_kwargs(first_name='Charles', last_name='Hessifer', age=21) # mutiple key/value pairs
+print_kwargs(message='Python Rocks!') # single key/value pair
+
+print()
+
+# NOTE: Ordering matters! The order should be as follows
+# 1. formal position arguments
+# 2. *args
+# 3. keyword arguments
+# 4. **kwargs
+
+print()
+
