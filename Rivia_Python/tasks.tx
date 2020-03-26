@@ -26,3 +26,28 @@ set of users. Handle any errors that may occurr and then test your funciton
 works as expected.
 
 7. Run flake8 against each program above and address any issues found.
+
+8. Build a function that takes a string as an argument (name) and returns a string (message)
+formatted using the .format() method. The message should include the name argument as a variable
+in your message.
+
+9. Write a simple method that writes the text hello world to a file named message.txt.
+If the file exists, overwrite it.
+
+10. Write a program that asks the user for a file to analyze. Consider the exceptions that may arise
+and handle them. Make sure to use type annotation. Once you have the file to read, examine the contents
+of the file and keep a count for each vowel found. Write the results to a file called vowel_search_results.txt 
+so that the output appears like:
+
+********* Vowel Search Report - /home/hessifer/source_file **********
+---------------------------------------------------------------------
+Unique Vowels Found: 5
+Number of Times Vowels Appear in File: 45
+A Count: 12
+E Count: 4
+I Count: 2
+O Count: 12
+U Count: 15
+
+11. Modify example 10 so that the file vowel_search_results.txt does not get overwritten. Insert a blank line before each new entry
+in the file.

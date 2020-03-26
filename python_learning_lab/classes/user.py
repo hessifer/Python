@@ -1,5 +1,6 @@
 class User:
     """A simple class for processing user information."""
+
     def __init__(self, first_name, last_name, username, email):
         """Initialize our user's information."""
         self.first_name = first_name
@@ -10,7 +11,8 @@ class User:
     def describe_user(self):
         """Process and display user data."""
         full_name = self.first_name + " " + self.last_name
-        print(f"Name: {full_name.title()}\n\tUsername: {self.username}\n\tE-mail: {self.email}")
+        print(
+            f"Name: {full_name.title()}\n\tUsername: {self.username}\n\tE-mail: {self.email}")
 
     def greet_user(self):
         """Display a greeting for the user."""
