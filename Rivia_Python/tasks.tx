@@ -35,9 +35,9 @@ in your message.
 If the file exists, overwrite it.
 
 10. Write a program that asks the user for a file to analyze. Consider the exceptions that may arise
-and handle them. Make sure to use type annotation. Once you have the file to read, examine the contents
-of the file and keep a count for each vowel found. Write the results to a file called vowel_search_results.txt 
-so that the output appears like:
+and handle them. Make sure to use type annotation for your variables and return types. Once you have
+the file to read, examine the contents of the file and keep a count for each vowel found. Write the
+results to a file called vowel_search_results.txt so that the output appears like:
 
 ********* Vowel Search Report - /home/hessifer/source_file **********
 ---------------------------------------------------------------------
