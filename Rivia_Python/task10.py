@@ -1,6 +1,6 @@
 """
 Write a program that asks the user for a file to analyze. Consider
-the exceptions that may ariseand handle them. Make sure to use type
+the exceptions that may arise and handle them. Make sure to use type
 annotation for your variables and return types. Once you have
 the file to read, examine the contents of the file and keep a count
 for each vowel found. Write the results to a file called
@@ -29,6 +29,9 @@ def main():
             data = fh.read()
     except FileNotFoundError:
         print(f"ERROR: Could not locate file.")
+        sys.exit(1)
+    except PermissionError:
+        print("ERROR: Operation not permitted.")
         sys.exit(1)
 
     # process data
@@ -87,8 +90,15 @@ def write_report(results: dict, source_file: str,
     report += f"{e_count}\nI Count: {i_count}\nO Count: {o_count}\nU Count: "
     report += f"{u_count}\n"
 
-    with open(report_file, 'w+') as fh:
-        fh.write(report)
+    try:
+        with open(report_file, 'w+') as fh:
+            fh.write(report)
+    except FileNotFoundError:
+        print("ERROR: No such directory.")
+        sys.exit(1)
+    except PermissionError:
+        print("ERROR: Operation not permitted.")
+        sys.exit(1)
 
 
 if __name__ == '__main__':
