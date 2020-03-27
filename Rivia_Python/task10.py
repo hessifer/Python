@@ -75,7 +75,7 @@ def write_report(results: dict, source_file: str,
 
     """
     header_top = f"{'*' * 10} Vowel Search Report - "
-    header_top += f"{ source_file} {'*' * 10}"
+    header_top += f"{source_file} {'*' * 10}"
     header_bottom = "{}".format("-" * len(header_top))
     unique_vowels_found = set(results.keys())
     total_vowels_found = sum(results.values())
