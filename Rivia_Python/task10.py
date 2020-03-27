@@ -1,8 +1,10 @@
 """
-Write a program that asks the user for a file to analyze. Consider the exceptions that may arise
-and handle them. Make sure to use type annotation for your variables and return types. Once you have
-the file to read, examine the contents of the file and keep a count for each vowel found. Write the
-results to a file called vowel_search_results.txt so that the output appears like:
+Write a program that asks the user for a file to analyze. Consider
+the exceptions that may ariseand handle them. Make sure to use type
+annotation for your variables and return types. Once you have
+the file to read, examine the contents of the file and keep a count
+for each vowel found. Write the results to a file called
+vowel_search_results.txt so that the output appears like:
 
 ********* Vowel Search Report - /home/hessifer/source_file **********
 ---------------------------------------------------------------------
@@ -14,43 +16,63 @@ I Count: 2
 O Count: 12
 U Count: 15
 """
+import sys
 
 
 def main():
     """Main entry of program."""
-    source_file = input("Please enter a file to analyze > ")
-    data = ""
+    source_file: str = input("Please enter a file to analyze > ")
+    data: str = ""
 
     try:
         with open(source_file) as fh:
-            for line in fh.readlines():
-                data += line
+            data = fh.read()
     except FileNotFoundError:
         print(f"ERROR: Could not locate file.")
- 
+        sys.exit(1)
+
     # process data
     write_report(get_vowel_stats(data), source_file)
 
 
 def get_vowel_stats(file: str) -> dict:
-    """Process a file to capture statistics on vowels."""
-    results = dict()
-    vowels = ('a', 'e', 'i', 'o', 'u')
+    """Process a file to capture statistics on vowels.
 
-    for line in file:
-        for word in line.strip().lower().split(" "):
-            for c in word:
-                if c in vowels:
-                    if c in results.keys():
-                        results[c] += 1
-                    else:
-                        results[c] = 1
+    Parameters:
+    file (str): the file to process
+
+    Returns:
+    dict: Key / Value pairs {'vowel': count}
+
+    """
+    results: dict = dict()
+    vowels: set = ('a', 'e', 'i', 'o', 'u')
+
+    for character in file:
+        c = character.lower()
+        if c in vowels:
+            if c in results.keys():
+                results[c] += 1
+            else:
+                results[c] = 1
     return results
 
 
-def write_report(results: dict, source_file: str, report_file="vowel_search_results.txt"):
-    """Takes a results dict and writes the data to a file."""
-    header_top = "{} Vowel Search Report - {} {}".format("*"*10, source_file, "*"*10)
+def write_report(results: dict, source_file: str,
+                 report_file: str = "vowel_search_results.txt"):
+    """Write our report to a file.
+
+    Parameters:
+    results (dict): dictionary containing statistics on vowels found
+    source_file (str): file from which statistics on vowels where generate
+    report_file (str): file to write report to (truncates file)
+
+    Returns:
+    None
+
+    """
+    header_top = f"{'*' * 10} Vowel Search Report - "
+    header_top += f"{ source_file} {'*' * 10}"
     header_bottom = "{}".format("-" * len(header_top))
     unique_vowels_found = set(results.keys())
     total_vowels_found = sum(results.values())
@@ -59,26 +81,14 @@ def write_report(results: dict, source_file: str, report_file="vowel_search_resu
     i_count = results.get('i')
     o_count = results.get('o')
     u_count = results.get('u')
+    report = f"{header_top}\n{header_bottom}\nUnique Vowels Found:"
+    report += f" {len(unique_vowels_found)}\nNumber of Times Vowels Appear in"
+    report += f" File: {total_vowels_found}\nA Count: {a_count}\nE Count: "
+    report += f"{e_count}\nI Count: {i_count}\nO Count: {o_count}\nU Count: "
+    report += f"{u_count}\n"
 
     with open(report_file, 'w+') as fh:
-        fh.write(header_top)
-        fh.write("\n")
-        fh.write(header_bottom)
-        fh.write("\n")
-        fh.write(f"Unique Vowels Found: {len(unique_vowels_found)}")
-        fh.write("\n")
-        fh.write(f"Number of Times Vowels Appear in File: {total_vowels_found}")
-        fh.write("\n")
-        fh.write(f"A Count: {a_count}")
-        fh.write("\n")
-        fh.write(f"E Count: {e_count}")
-        fh.write("\n")
-        fh.write(f"I Count: {i_count}")
-        fh.write("\n")
-        fh.write(f"O Count: {o_count}")
-        fh.write("\n")
-        fh.write(f"U Count: {u_count}")
-        fh.write("\n")
+        fh.write(report)
 
 
 if __name__ == '__main__':
