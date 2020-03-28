@@ -1,9 +1,9 @@
 ********** Vowel Search Report - /etc/services **********
 ---------------------------------------------------------
 Unique Vowels Found: 5
-Number of Times Vowels Appear in File: 115327
-A Count: 25642
-E Count: 32516
-I Count: 21341
-O Count: 22954
-U Count: 12874
+Number of Times Vowels Appear in File: 154560
+A Count: 35158
+E Count: 46710
+I Count: 28890
+O Count: 28521
+U Count: 15281

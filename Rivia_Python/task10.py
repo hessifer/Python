@@ -22,7 +22,6 @@ import sys
 def main():
     """Main entry of program."""
     source_file: str = input("Please enter a file to analyze > ")
-    data: str = ""
 
     try:
         with open(source_file) as fh:
@@ -49,7 +48,7 @@ def get_vowel_stats(file: str) -> dict:
 
     """
     results: dict = dict()
-    vowels: set = ('a', 'e', 'i', 'o', 'u')
+    vowels: set = {'a', 'e', 'i', 'o', 'u'}
 
     for character in file:
         c = character.lower()
