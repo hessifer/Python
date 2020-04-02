@@ -1,4 +1,7 @@
 """
+Modify example 10 so that the file vowel_search_results.txt does not
+get overwritten. Insert a blank line before each new entry in the file.
+
 Write a program that asks the user for a file to analyze. Consider
 the exceptions that may arise and handle them. Make sure to use type
 annotation for your variables and return types. Once you have
@@ -15,6 +18,17 @@ E Count: 4
 I Count: 2
 O Count: 12
 U Count: 15
+
+********** Vowel Search Report - /etc/services **********
+---------------------------------------------------------
+Unique Vowels Found: 5
+Number of Times Vowels Appear in File: 154560
+A Count: 35158
+E Count: 46710
+I Count: 28890
+O Count: 28521
+U Count: 15281
+
 """
 import sys
 
@@ -88,9 +102,10 @@ def write_report(results: dict, source_file: str,
     report += f" File: {total_vowels_found}\nA Count: {a_count}\nE Count: "
     report += f"{e_count}\nI Count: {i_count}\nO Count: {o_count}\nU Count: "
     report += f"{u_count}\n"
+    report += "\n"
 
     try:
-        with open(report_file, 'w+') as fh:
+        with open(report_file, 'a') as fh:
             fh.write(report)
     except FileNotFoundError:
         print("ERROR: No such directory.")
