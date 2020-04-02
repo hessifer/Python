@@ -20,3 +20,23 @@ I Count: 28890
 O Count: 28521
 U Count: 15281
 
+********** Vowel Search Report - /etc/hosts **********
+------------------------------------------------------
+Unique Vowels Found: 5
+Number of Times Vowels Appear in File: 47
+A Count: 11
+E Count: 11
+I Count: 6
+O Count: 17
+U Count: 2
+
+********** Vowel Search Report - /etc/services **********
+---------------------------------------------------------
+Unique Vowels Found: 5
+Number of Times Vowels Appear in File: 115327
+A Count: 25642
+E Count: 32516
+I Count: 21341
+O Count: 22954
+U Count: 12874
+

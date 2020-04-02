@@ -1,0 +1,256 @@
+Agenda:
+    1. Review improvments to task10.py
+    2. Review task11.py
+    3. Discussion on list comprehensions
+    4. Discussion on enumerate built-in function (bif)
+    5. Discussion on zip bif
+    6. Discussion on modules
+    7. Discuss sys.argv and how to import
+    8. Coding exercise: modify task11.py to take the filename as an argument to script so 
+       that it is no longer hard-coded.
+    9. Coding exercise: modify task1.py to check that the source file provided as an
+       argument exist. If not display that message to the user and exit.
+    10. Intro to OOP
+    
+    Code Pairing:
+        Aleks -> Camilo
+        Miles -> Andrew
+        Pat -> Alex
+
+Key URLs:
+    https://realpython.com/python-type-checking/
+    
+Tasks:
+    task12.py - copy task11.py to task12.py and modify to take the src filename as an argument
+                as well as the target filename as an argument to script so that it is no longer hard-coded.
+                If the user does not have the correct number of arguments, print a usage/help info
+                to the screen.
+                
+                usage: name_of_script.py [src_file] [dst_file]
+                
+    task13.py - modify task12.py to check that the source and target file provided as
+                arguments exist on the filesystem. If not display a useful error message to the user and exit.
+    
++++++++++++++++++++++++++++++++
+
+Camilo:
+"""
+Task10: Write a program that asks the user for a file to analyze.
+Consider the exceptions that may arise and handle them.
+Make sure to use type annotation for your variables and return types.
+Once you have the file to read, examine the contents of the file and
+keep a count for each vowel found. Write the results to a file called
+vowel_search_results.txt so that the output appears like:
+
+
+********* Vowel Search Report - /home/hessifer/source_file **********
+---------------------------------------------------------------------
+Unique Vowels Found: 5
+Number of Times Vowels Appear in File: 45
+A Count: 12
+E Count: 4
+I Count: 2
+O Count: 12
+U Count: 15
+
+"""
+
+
+def main():
+    import os
+    mypath = os.getcwd()
+    vowels = ['a', 'e', 'i', 'o', 'u']
+    vowels_count = {'a': 0, 'e': 0, 'i': 0, 'o': 0, 'u':0}
+    vowels_unique = set()
+
+    user_f: str = input("Enter file name: ")
+    try:
+        # with open("rivia.txt", "r") as user_file:
+        with open(user_f, "r") as user_file:
+            for line in user_file:
+                for character in line:
+                    if character in vowels:
+                        vowels_count[character] += 1
+                        vowels_unique.add(character)
+        mypath = mypath + "/" + user_f
+        print(mypath)
+    except FileNotFoundError as fe:
+        print(f"Verify the name of the file - {fe}")
+    else:
+        report = f"{'*' * 10}  Vowel Search Report - {mypath} {'*' * 10}\n"
+        
+        for item in vowels_count:
+            report += f" {item.upper()} Count: {vowels_count[item]}\n"
+        unique = len(vowels_unique)
+        Total_vowels = sum(vowels_count.values())
+        report += f"Unique Vowels Found: {unique}\n"
+        report += f"Number of Times Vowels Appear in File: {Total_vowels}\n"
+
+        try:
+            report_file: str = "vowel_search_results.txt"
+            with open(report_file, 'w+') as fh:
+                fh.write(report)
+        except FileNotFoundError as fe:
+            print(f"Verify the name of the file - {fe}")
+
+
+if __name__ == '__main__':
+    main()
+    
+
+"""
+Task 11. Modify example 10 so that the file vowel_search_results.txt does not get overwritten. Insert a blank line before each new entry
+in the file.
+********* Vowel Search Report - /home/hessifer/source_file **********
+---------------------------------------------------------------------
+Unique Vowels Found: 5
+Number of Times Vowels Appear in File: 45
+A Count: 12
+E Count: 4
+I Count: 2
+O Count: 12
+U Count: 15
+********** Vowel Search Report - /etc/services **********
+---------------------------------------------------------
+Unique Vowels Found: 5
+Number of Times Vowels Appear in File: 154560
+A Count: 35158
+E Count: 46710
+I Count: 28890
+O Count: 28521
+U Count: 15281
+"""
+
+
+def main():
+    import os
+    mypath = os.getcwd()
+    vowels = ['a', 'e', 'i', 'o', 'u']
+    vowels_count = {'a': 0, 'e': 0, 'i': 0, 'o': 0, 'u':0}
+    vowels_unique = set()
+
+    user_f: str = input("Enter file name: ")
+    try:
+        # with open("rivia.txt", "r") as user_file:
+        with open(user_f, "r") as user_file:
+            for line in user_file:
+                for character in line:
+                    if character in vowels:
+                        vowels_count[character] += 1
+                        vowels_unique.add(character)
+        mypath = mypath + "/" + user_f
+        print(mypath)
+    except FileNotFoundError as fe:
+        print(f"Verify the name of the file - {fe}")
+    else:
+        report = f"{'*' * 10}  Vowel Search Report - {mypath} {'*' * 10}\n"
+        
+        for item in vowels_count:
+            report += f" {item.upper()} Count: {vowels_count[item]}\n"
+        unique = len(vowels_unique)
+        Total_vowels = sum(vowels_count.values())
+        report += f"Unique Vowels Found: {unique}\n"
+        report += f"Number of Times Vowels Appear in File: {Total_vowels}\n"
+        report += "\n"
+
+        try:
+            report_file: str = "vowel_search_results.txt"
+            with open(report_file, 'a') as fh:
+                fh.write(report)
+        except FileNotFoundError as fe:
+            print(f"Verify the name of the file - {fe}")
+
+
+if __name__ == '__main__':
+    main()
+
+
+***********************************
+
+def vowel_counter():
+    vowels: List[str] = ['a', 'e', 'i', 'o', 'u']
+    empty_vowel_count: List[str] = []
+    unique_vowels = set()
+    file: str = input(" Please enter in a file name: ")
+
+    try:
+        with open(file) as f:
+            content = f.read()
+
+        with open('miles.txt', 'a') as w:
+            for letter in content:
+                if letter in vowels:
+                    unique_vowels.add(letter)
+            w.write(f"Unique Vowels Found: {len(unique_vowels)}\n")
+
+            for letter in content:
+                if letter in vowels:
+                    empty_vowel_count.append(letter)
+            w.write(f"Number of Times Vowels Appear in File: {len(empty_vowel_count)}\n ")
+
+            a = empty_vowel_count.count('a')
+            w.write(f"A count: {a}\n ")
+            e = empty_vowel_count.count('e')
+            w.write(f"E count: {e}\n ")
+            i = empty_vowel_count.count('i')
+            w.write(f"I count: {i}\n ")
+            o = empty_vowel_count.count('o')
+            w.write(f"O count: {o}\n ")
+            u = empty_vowel_count.count('u')
+            w.write(f"U count: {u}\n ")
+            w.write("\n")
+
+    except FileNotFoundError:
+        print('Error File does not exist')
+
+
+if __name__ == '__main__':
+    vowel_counter()
+    
+*** Pat ***
+names = ['Pat', 'Miles', 'Charles', 'Sean']
+[x for x in names if 'e' in x]
+
+
+***miles***
+
+
+test_list = ["this", "is", "a", "test"]
+items = [word[0] for word in test_list]
+print(items)
+
+test_list2 = ['This', 'is', 'another', 'test']
+for i in enumerate(test_list2):
+    print(i)
+
+['t', 'i', 'a', 't']
+(0, 'This')
+(1, 'is')
+(2, 'another')
+(3, 'test')
+
+Process finished with exit code 0
+
+
+** aleks **
+string = "A badklfjas;dfuaweifjas;kldjfaasd;fkljas;ldkfjas ;kldfja sdf"
+[c for c in string.lower() if c in ['a','e','i','o','u']]
+
+
+*** Pat *** 
+team_name = ['Packers', 'Redskins', 'Giants', 'Vikings']
+team_colors = ['Green/Gold', 'Crimson/Gold', 'Blue/Silver', 'Purple/NeverWonASB']
+
+print(list(zip(team_name, team_colors)))
+
+*** Miles ***
+a = ('Miles', 'Monica')
+b = ('Corey', 'Jasmine')
+x = zip(a, b)
+print(x)
+
+*** Alex ***
+sports = ['soccer', 'basketball', 'football', 'tennis']
+event = ['World Cup', 'NBA Finals', 'Superbowl', 'Wimbledon']
+print(list(zip(sports, event)))
+
