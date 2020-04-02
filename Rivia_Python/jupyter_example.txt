@@ -1,0 +1,7 @@
+URL: https://jupyter.org/
+
+1. source your virtual env for python
+2. pip install jupyter
+3. jupyter notebook
+4. navigate to the url specified in the output from #3
+   if your default browser does not open it

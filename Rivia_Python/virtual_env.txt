@@ -1,0 +1,9 @@
+url: https://docs.python.org/3/library/venv.html
+
+Python 3.6
+1. ➜  ~ python3 -m venv /Users/hessifc/py36dev
+2. source /Users/hessifc/py36dev/bin/activate
+3. pip list
+4. pip install --upgrade pip
+5. pip list
+6. pip install flake8
