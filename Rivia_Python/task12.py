@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Modify example 10 so that the file vowel_search_results.txt does not
 get overwritten. Insert a blank line before each new entry in the file.
