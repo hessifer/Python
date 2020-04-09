@@ -8,7 +8,7 @@ Agenda:
     7. Discuss sys.argv and how to import
     8. Coding exercise: modify task11.py to take the filename as an argument to script so 
        that it is no longer hard-coded.
-    9. Coding exercise: modify task1.py to check that the source file provided as an
+    9. Coding exercise: modify task11.py to check that the source file provided as an
        argument exist. If not display that message to the user and exit.
     10. Intro to OOP
     
