@@ -1,0 +1,167 @@
+Agenda:
+    1. review topics from discussion 5
+    2. discuss some key vocabulary associated with OOP
+        - class
+        - object
+        - instance
+        - self
+        - inheritance
+        - attribute
+        - method
+    3. is-a()
+    4. Coding exercise 1
+        - create your own class and share it with the team. your class should follow
+          the appropriate PEP8 rules, utilize a intilization method, have at least 2
+          attributes of different data types. Finally, your class should implement at least
+          two methods.
+    5. Inheritance
+        - basic overview
+        - discussion on super()
+    6. Coding exercise 2
+        - create two classes one should be the base class and the other should be the child class.
+          Ensure you are using inheritance correctly. In your childtt class use both attributes 
+          from the base class and from you child class. (hint: use super())
+
+**************************
+
+Github Link: https://github.com/hessifer/Python/tree/master/Rivia_Python
+
+Updated Coding Partners:
+    1. Alex -> Miles
+    2. Melissa -> Barney
+    3. Pat -> Camilo
+    4. Aleks -> Andrew
+
+**************************
+
+Discussion
+--------------------------
+#### PAT ####
+class Monitor:
+    """Class definition for tracking Monitor types"""
+    def __init__(self, monitor_make: str, monitor_model: str) -> None:
+        self.m_make = monitor_make
+        self.m_model = monitor_model
+
+    def set_resoltion(self, x_res: int, y_res: int) -> None:
+        setattr(self, 'x_res', x_res)
+        setattr(self, 'y_res', y_res)
+
+    def set_connection(self, connection_types: list) -> None:
+        setattr(self, 'connection_types', connection_types)
+
+    def __str__(self) -> str:
+        monitor_desc: str = '''
+Monitor Manufacturer:   {}
+Monitor Make:           {}
+Resolution:             {} x {}
+Coonection Types:       {}
+        '''
+        return(monitor_desc.format(self.m_make, self.m_model,
+               self.x_res, self.y_res, ', '.join(self.connection_types)))
+
+
+apple = Monitor('Apple', 'Thunderbolt')
+apple.set_resoltion(2560, 1440)
+apple.set_connection(['Lightning', 'USB-C'])
+
+print(apple)
+
+Monitor Manufacturer:   Apple
+Monitor Make:           Thunderbolt
+Resolution:             2560 x 1440
+Coonection Types:       Lightning, USB-C
+********************************************* 
+      
+#### barney #### 
+
+import random
+import string
+
+
+class Vehicle:
+    """Vehicle class"""
+
+    def __init__(self, wheels, doors, electric=False):
+        self.wheels: int = wheels
+        self.doors: int = doors
+        self.electric: bool = electric
+        self.plate: string = self.generate_license_plate()
+
+    def __str__(self):
+        return f"Vehicle: [wheels = {self.wheels}, doors = {self.doors}, electrics = {self.electric}, \
+        plate = {self.plate}]"
+
+    @staticmethod
+    def generate_license_plate():
+        """generate license plate (ex: 1a2b3c4d)"""
+        plate = ""
+        for x in range(0, 8):
+            if x % 2 == 0:
+                plate += str(random.randint(0, 9))
+            else:
+                plate += random.choice(string.ascii_lowercase)
+        return plate
+
+
+class Coupe(Vehicle):
+    """Coupe extends vehicle"""
+
+    def __init__(self, convertible, wheels, electric, doors=2):
+        super().__init__(wheels, doors, electric)
+        self.convertible: bool = convertible
+
+    def __str__(self):
+        return f"Coupe: [wheels = {self.wheels}, doors = {self.doors}, electrics = {self.electric}, \
+        convertible = {self.convertible}], plate = {self.plate}"
+        
+*********************************************
+class Sprint:
+    def __init__(self, story: list, subtask: list):
+        """ Initialize  attributes"""
+        self.story = story 
+        self.subtask = subtask
+
+    def add_subtask (self, task):
+        self.subtask.append(task)
+
+    def add_story (self, story):
+        self.story.append(story)
+
+
+    if __name__ == '__main__':
+        storylist = ["Create Wiki"]
+        subtasklist = ["Document"]
+        sim_2050 = Sprint(storylist, subtasklist) # Calling the class
+        sim_2050.add_subtask("Research") # Calling the method
+********
+### Miles ###
+
+class Dog:
+
+    def __init__(self, name, breed, color):
+        self.breed = breed
+        self.color = color
+        self.name = name
+
+    def introduce(self):
+        print('My name is: ', self.name)
+        print('I am a: ', self.breed)
+        print('I am also the color: ', self.color)
+
+    def personal(self, vaccinated: bool, groomed: bool):
+        if vaccinated:
+            print('I am up-to-date on shots')
+        else:
+            print('I am not vaccinated')
+            
+        if groomed:
+            print('I look good')
+        else:
+            print('I am not groomed')
+
+
+oli = Dog('Oli', 'YorkiPoo', 'Black')
+oli.introduce()
+oli.personal(True, True)
+******
