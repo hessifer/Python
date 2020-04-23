@@ -9,7 +9,7 @@ Agenda:
         - attribute
         - method
     3. is-a()
-    4. Coding exercise 1
+    4. Coding exercise 1 (task 14)
         - create your own class and share it with the team. your class should follow
           the appropriate PEP8 rules, utilize a intilization method, have at least 2
           attributes of different data types. Finally, your class should implement at least
@@ -17,7 +17,7 @@ Agenda:
     5. Inheritance
         - basic overview
         - discussion on super()
-    6. Coding exercise 2
+    6. Coding exercise 2 (task 14)
         - create two classes one should be the base class and the other should be the child class.
           Ensure you are using inheritance correctly. In your childtt class use both attributes 
           from the base class and from you child class. (hint: use super())

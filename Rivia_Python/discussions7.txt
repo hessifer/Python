@@ -10,11 +10,11 @@ Agenda
 
 Coding Exercise
 
-Coding exercise 1
+Coding exercise 1 (task15)
     - continue to work on library class, look for ways to improve our code and add two additional
       methods related to normal interaction with a library (unregister user, checkout books).
 
-Coding exercise 2
+Coding exercise 2 (task14 from discussions6.txt)
         - create two classes one should be the base class and the other should be the child class.
           Ensure you are using inheritance correctly. In your child class use both attributes 
           from the base class and from you child class. (hint: use super()) <- research
