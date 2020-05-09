@@ -1,0 +1,34 @@
+1. Generator
+  - code exercise: create a generator of your own
+2. Review Iterator
+3. Review List Comprehension
+  - code exercise: create a basic list comprehension that creates a list of numbers 1 - 10
+  - code exercise: create a list comprehension that creates a list of odd numbers 1 - 10
+  - code exercise: create a list comprehension that creates a list where odd numbers are
+    indicated by their respective number and even numbers are indicated by "even".
+    example output: [1, "even", 3, "even"]
+4. Review filter()
+  - code exercise: write code that uses filter to process a list of strings for fruits 
+    and produces the fruit list.
+    example input: ["dog", "cat", "apple", "squash", "okra", "pear"]
+    example output: ["apple", "pear"]
+5. LambdaExpressions
+6. Control Structure Exercises
+  - Error Handling
+  - Loops
+  - Functions
+  - Data Types (various)
+7. OOP Inheritance - super()
+8. task 14 - Write a program that takes 3 command line arguments to produce a friendly
+   formatted output of files greater than the specified size and older than the
+   specified age:
+    - directory_path -> location on the file system to analyze
+    - file_size -> file size or greater in bytes that the tool should look for
+    - file_age -> file age or greater in days that the tool should look for
+9. task 15 - Write a program that takes the text you have provided
+   and returns an audio file in the language specified. Have the code ask the user
+   if they would like to play the file. Use AWS services for this exercise.
+10. task 16 - Write a program that plays the game BlackJack with a user. For this
+    exercise you can use procedural or OOP programming styles. Research the rules
+    of BlackJack to ensure your game is authentic.
+11. Review IPython
