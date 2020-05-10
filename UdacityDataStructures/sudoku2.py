@@ -1,5 +1,4 @@
 """Sudoku class for interacting with elements of a Sudoku puzzle."""
-import sys
 
 
 class Sudoku:
@@ -51,6 +50,8 @@ class Sudoku:
 
 
 if __name__ == '__main__':
+    import sys
+
     # fails
     test_list = [
         [1, 2, 3, 4],
