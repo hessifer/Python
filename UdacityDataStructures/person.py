@@ -53,7 +53,8 @@ def get_most_common_month(people):
 
 
 def test():
-    # Here is the data for the test. Assume there is a single most common month.
+    # Here is the data for the test. Assume there is a single most common
+    # month.
     names = ['Howard', 'Richard', 'Jules', 'Trula', 'Michael', 'Elizabeth',
              'Richard', 'Shirley', 'Mark', 'Brianna', 'Kenneth', 'Gwen',
              'William', 'Rosa', 'Denver', 'Shelly', 'Sammy', 'Maryann',
