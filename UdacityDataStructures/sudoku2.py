@@ -1,4 +1,5 @@
 """Sudoku class for interacting with elements of a Sudoku puzzle."""
+import sys
 
 
 class Sudoku:
@@ -82,3 +83,4 @@ if __name__ == '__main__':
                 continue
         else:
             print("ERROR: Could not validate Sudoku puzzle size...exiting")
+            sys.exit(1)
