@@ -1,5 +1,14 @@
 from datetime import date
 
+"""
+Solving Problems
+0. Don't Panic
+1. Understand the requirements.
+2. Determine inputs. What is the set of inputs?
+    - Validate your inputs.
+3. 
+"""
+
 
 class Birthday:
     """
@@ -8,6 +17,9 @@ class Birthday:
     """
     def __init__(self, birth_yyyy: str, birth_mm: str, birth_dd: str):
         self.current_date = date.today()
+        if int(birth_yyyy) > self.current_date.year:
+            raise ValueError("Birth year cannot be greater than current year.")
+
         self.bdate = date.fromisoformat(f"{birth_yyyy}-{birth_mm}-{birth_dd}")
         self.birth_year = birth_yyyy
         self.birth_month = birth_mm
@@ -43,3 +55,7 @@ if __name__ == '__main__':
           f"your were born.")
     print(f"Sally, it has been {sally.days_since_birth():,} days "
           f"since your were born.")
+    # raise an error
+    fail = Birthday('2022', '11', '04')
+    print(f"Fail, it has been {fail.days_since_birth():,} days since "
+          f"your were born.")
