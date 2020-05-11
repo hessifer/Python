@@ -15,12 +15,18 @@ class Birthday:
     The Birthday class provides behaviors for dealing with a person's
     birthday.
     """
+    gregorian_cal = date.fromisoformat("1582-10-15")
+
     def __init__(self, birth_yyyy: str, birth_mm: str, birth_dd: str):
         self.current_date = date.today()
         if int(birth_yyyy) > self.current_date.year:
             raise ValueError("Birth year cannot be greater than current year.")
 
         self.bdate = date.fromisoformat(f"{birth_yyyy}-{birth_mm}-{birth_dd}")
+        if self.bdate < Birthday.gregorian_cal:
+            raise ValueError("Only birth years since Gregorian calendar are"
+                             " not supported.")
+
         self.birth_year = birth_yyyy
         self.birth_month = birth_mm
         self.birth_day = birth_dd
@@ -56,6 +62,11 @@ if __name__ == '__main__':
     print(f"Sally, it has been {sally.days_since_birth():,} days "
           f"since your were born.")
     # raise an error
-    fail = Birthday('2022', '11', '04')
-    print(f"Fail, it has been {fail.days_since_birth():,} days since "
-          f"your were born.")
+    # fail = Birthday('2022', '11', '04')
+    # print(f"Fail, it has been {fail.days_since_birth():,} days since "
+    #      f"your were born.")
+
+    # raise an error
+    # fail2 = Birthday('1580', '09', '05')
+    # print(f"Fail2, it has been {fail2.days_since_birth():,} days "
+    #       f"since your were born.")
