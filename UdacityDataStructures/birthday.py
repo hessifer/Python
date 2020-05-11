@@ -39,5 +39,7 @@ class Birthday:
 if __name__ == '__main__':
     bob = Birthday('1983', '11', '06')
     sally = Birthday('1968', '02', '03')
-    print(f"Bob, it has been {bob.days_since_birth():,} days since your were born.")
-    print(f"Sally, it has been {sally.days_since_birth():,} days since your were born.")
+    print(f"Bob, it has been {bob.days_since_birth():,} days since "
+          f"your were born.")
+    print(f"Sally, it has been {sally.days_since_birth():,} days "
+          f"since your were born.")
