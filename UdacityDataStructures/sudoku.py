@@ -29,35 +29,52 @@ def main():
     print(check_sudoku(incorrect))
     # >>> False
 
-    # print(check_sudoku(correct))
+    print(check_sudoku(correct))
     # >>> True
 
-    # print(check_sudoku(incorrect2))
+    print(check_sudoku(incorrect2))
     # >>> False
 
-    # print(check_sudoku(incorrect3))
+    print(check_sudoku(incorrect3))
     # >>> False
 
-    # print(check_sudoku(incorrect4))
+    print(check_sudoku(incorrect4))
     # >>> False
 
-    # print(check_sudoku(incorrect5))
+    print(check_sudoku(incorrect5))
     # >>> False
 
 
 def check_sudoku(entries):
+    # loop over entries iterator (nested list).
+    # row represents a list during each iteration
+
+    # examine the contents of each row first to confirm
+    # each expected value is present in the row list.
+    # If not return False and we are done.
     for row in entries:
-        results = list(range(1, len(entries[0]) + 1))
-        for i in row:
-            if i not in results:
+        expected_values = list(range(1, len(entries[0]) + 1))
+
+        for number in row:
+            if number not in expected_values:
                 return False
-        results.remove(i)
-    for n in range(len(entries[0])):
-        results = list(range(len(entries[0])))
+            expected_values.remove(number)
+
+    # create an iterator using the generator range() and
+    # iterate over it, the iteration count is based on
+    # the size of our function argument 'entries'
+
+    # loop over each nested list
+    for i in range(len(entries[0])):
+        # create our expected_values list and populate it with
+        # each value from 0 to the length of the first element (list)
+        # minus 1 (using range) of the entries argument.
+        expected_values = list(range(1, len(entries[0]) + 1))  # [1, 2, 3, 4]
+
         for row in entries:
-            if row[n] not in results:
+            if row[i] not in expected_values:
                 return False
-        results.remove(row[n])
+            expected_values.remove(row[i])
     return True
 
 
