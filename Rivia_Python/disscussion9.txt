@@ -4,7 +4,9 @@
    code and not subprocess to execute Linux commands such as find.
 4. Create a UML diagram (no need to get super fancy) for your Black Jack game
    provided it was implemented in OOP.
-5. Continue work on refactoring Black Jack game based on UML diagram.
+5. Continue work on refactoring Black Jack game based on UML or Precedural diagram.
 6. Review / Complete the text to voice program.
 7. Research / Practice Pytest / Unittest
    - https://docs.pytest.org/en/latest/
+8. Ensure you update your project code to github (Charles to provide repo)
+   - feel free to upload a simple readme.md
