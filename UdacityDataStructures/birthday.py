@@ -1,14 +1,5 @@
 from datetime import date
 
-"""
-Solving Problems
-0. Don't Panic
-1. Understand the requirements.
-2. Determine inputs. What is the set of inputs?
-    - Validate your inputs.
-3. 
-"""
-
 
 class Birthday:
     """
@@ -25,7 +16,7 @@ class Birthday:
         self.bdate = date.fromisoformat(f"{birth_yyyy}-{birth_mm}-{birth_dd}")
         if self.bdate < Birthday.gregorian_cal:
             raise ValueError("Only birth years since Gregorian calendar are"
-                             " not supported.")
+                             "supported.")
 
         self.birth_year = birth_yyyy
         self.birth_month = birth_mm
@@ -42,7 +33,6 @@ class Birthday:
                 return False
         else:
             return False
-        return True
 
     def days_since_birth(self) -> int:
         timedelta = self.current_date - self.bdate
