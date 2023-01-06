@@ -1,6 +1,6 @@
 def main() -> None:
-    print(fib(7)) # 8 
-    print(fib(2)) # 1
+    print(fib(7))  # 8
+    print(fib(2))  # 1
 
 
 def fib(n) -> int:
