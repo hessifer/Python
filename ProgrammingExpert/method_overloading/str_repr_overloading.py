@@ -33,6 +33,8 @@ class Book:
         return output
 
     def __repr__(self):
+        # repr is useful to help debug and provide
+        # useful information about the object
         return f"Book(id_number = {self.id_number})"
 
 
@@ -42,6 +44,5 @@ book = Book("Tim is Great", "Tim", [page1, page2], 1)
 print(len(page2))
 print(len(book))
 print(page1)
-print(book)
+print(book)  # behind the scenes, Python specifically calls str() on the instance of a class
 print(repr(book))
-print(str(book))
