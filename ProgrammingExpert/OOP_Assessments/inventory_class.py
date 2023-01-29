@@ -1,7 +1,6 @@
 class Inventory:
     def __init__(self, max_capacity):
         self.max_capacity = max_capacity
-        #self.items = {"": {}} 
         self.items = {} 
         self.item_count = 0
 
@@ -27,29 +26,43 @@ class Inventory:
 
         if not name in self.items.keys():
             return False
+        self.item_count -= self.items[name]['quantity']
         self.items.__delitem__(name)
         
         return True
 
     def get_items_in_price_range(self, min_price, max_price):
+        if isinstance(min_price, float):
+            min_price = int(min_price)
+        
+        if isinstance(max_price, float):
+            max_price = int(max_price)
+
         price_range = range(min_price, max_price + 1)
         item_price_match_list = []
 
-        print(self.items)
         for k, v in self.items.items():
-                if v['price'] in price_range:
+                if int(v['price']) in price_range:
                     item_price_match_list.append(k)
         
         return item_price_match_list
 
     def get_most_stocked_item(self):
-        pass
+        item_with_highest_quantity = ""
+        highest_quantity = 0
 
+        if len(self.items) == 0:
+            return None
+        for k, v in self.items.items():
+            if v['quantity'] > highest_quantity:
+                item_with_highest_quantity = k
+            elif v['quantity'] == highest_quantity:
+                item_with_highest_quantity = ""
+ 
+        if not item_with_highest_quantity:
+            return None
 
-if __name__ == '__main__':
-    inventory = Inventory(5)
-    inventory.add_item('Milk', 3.00, 1)
-    inventory.add_item('eggs', 10.00, 1)
-    inventory.add_item('bread', 4.00, 1)
-    inventory.add_item('ham', 8.00, 1)
-    print(inventory.get_items_in_price_range(8, 10))
+        return item_with_highest_quantity
+
+    def __str__(self):
+        return f"Items in Inventory: {self.items}"
