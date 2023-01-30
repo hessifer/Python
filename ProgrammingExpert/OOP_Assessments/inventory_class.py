@@ -65,4 +65,4 @@ class Inventory:
         return item_with_highest_quantity
 
     def __str__(self):
-        return f"Items in Inventory: {self.items}"
+        return f"Items in Inventory: {self.items}, Inventory Capacity: {self.max_capacity}"
