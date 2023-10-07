@@ -1,9 +1,5 @@
-# This suite of tests is written to run against your code
-# so that we can check its correctness.
-
 import unittest
 import math
-
 from VectorClass import Vector
 
 
