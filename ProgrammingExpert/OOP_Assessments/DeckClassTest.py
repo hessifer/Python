@@ -1,6 +1,6 @@
 import unittest
 
-from program import Deck
+from DeckClass import Deck
 
 
 valid_values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
@@ -83,3 +83,7 @@ class TestProgram(unittest.TestCase):
         cards = deck1.get_cards()
         cards[0] = 'FAKE CARD'
         self.assertNotIn('FAKE CARD', deck1.get_cards())
+
+
+if __name__ == "__main__":
+    unittest.main()
