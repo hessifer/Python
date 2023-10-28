@@ -1,7 +1,7 @@
 # Unit tests to check your solution
 
 import unittest
-import GaussianClass as GC
+import GaussianClassOrig as GC
 
 
 class TestGaussianClass(unittest.TestCase):
@@ -10,7 +10,8 @@ class TestGaussianClass(unittest.TestCase):
 
     def test_initialization(self):
         self.assertEqual(self.gaussian.mean, 25, 'incorrect mean')
-        self.assertEqual(self.gaussian.stdev, 2, 'incorrect standard deviation')
+        self.assertEqual(self.gaussian.stdev, 2, 'incorrect \
+                         standard deviation')
 
     def test_pdf(self):
         self.assertEqual(round(self.gaussian.pdf(25), 5), 0.19947,
