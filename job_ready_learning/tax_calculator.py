@@ -98,7 +98,8 @@ def menu() -> tuple:
         return (gross_income, number_of_dependents, filing_status)
 
 
-def calculate_taxable_income(gross_income, number_of_dependents):
+def calculate_taxable_income(gross_income: float,
+                             number_of_dependents: int) -> float:
     """
     description: function to calculate taxable income. takes gross
         income and number of dependents as input. The formula used
@@ -116,6 +117,17 @@ def calculate_taxable_income(gross_income, number_of_dependents):
 
     return gross_income - STANDARD_DEDUCTION -\
         (ADDITIONAL_DEDUCTION_PER_DEPENDENT * number_of_dependents)
+
+
+def calculate_tax_rate(taxable_income: float, filing_status: str) -> float:
+    if filing_status == "mfj":
+        pass
+    elif filing_status == "single":
+        pass
+    elif filing_status == "hoh":
+        pass
+    else:
+        sys.exit(f"ERROR: invalid filing status {filing_status}")
 
 
 if __name__ == "__main__":
