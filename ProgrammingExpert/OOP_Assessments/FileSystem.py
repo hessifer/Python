@@ -18,6 +18,7 @@ class FileSystem:
         # accounting for a trailing "/"
         directory_nodes_not_empty = [d for d in directory_nodes if len(d) > 0]
         
+        # 
         # /parent_dir/child_dir/
         # splict nodes by '/' as separator
         nodes_in_path = path[1:].split('/')
