@@ -1,5 +1,6 @@
 .ipynb_checkpoints
 .DS_Store
+.venv
 .vscode/
 /target/
 **/*.rs.bk
