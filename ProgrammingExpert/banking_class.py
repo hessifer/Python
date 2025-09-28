@@ -17,6 +17,9 @@ class BankAccount:
             self._balance = amount
 
     # balance = property(get_balance, set_balance)  # legacy property
+    name = "charles"
+
+    print(f"Name: {name}")
 
 
 def main():

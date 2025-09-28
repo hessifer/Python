@@ -30,6 +30,7 @@ for item in inventory:
     print("Item Name: {} - Item Description: {}".format(item.name, item.description))
 
 
-
+for i in inventory:
+    print(f"Item Name: {i.name}")
 
 

@@ -67,7 +67,8 @@ class D3(Die):
 if __name__ == "__main__":
     d6 = D6()
     d4 = D4()
-    
+
+    print("Hello")
     print(f"d6 Value: {int(d6)}")
     print(f"d4 Value: {int(d4)}")
     print()

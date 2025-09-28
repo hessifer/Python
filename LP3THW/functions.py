@@ -18,8 +18,7 @@ def multiply(num1, num2):
 
 def divide(num1, num2):
     """divide num1 with num2 and return the resluts."""
-    return num1 / num2
-
+    return num1 / num2 
 
 if __name__ == "__main__":
     print("Let's power on our calculator.")
