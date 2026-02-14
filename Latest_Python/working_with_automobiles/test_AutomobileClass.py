@@ -1,7 +1,27 @@
 """Pytest tests for AutomobileClass.Automobile."""
 
+import pytest
 from AutomobileClass import Automobile
 
+@pytest.fixture
+def car():
+    return Automobile("Toyota", "Camry", 2023)
+
+@pytest.fixture
+def car_with_partial_tank():
+    return Automobile("Toyota", "Camry", 2023, fuel_capacity=15.0, fuel_level=5.0)
+
+@pytest.fixture
+def car_with_full_tank():
+    return Automobile("Toyota", "Camry", 2023, fuel_capacity=15.0, fuel_level=15.0)
+
+@pytest.fixture
+def car_with_negative_mileage():
+    return Automobile("Toyota", "Camry", 2023, mileage=-100.0)
+
+@pytest.fixture
+def car_with_positive_mileage():
+    return Automobile("Toyota", "Camry", 2023, mileage=100.0)
 
 class TestAutomobileInit:
     """Tests for Automobile.__init__ and default attributes."""
@@ -52,35 +72,30 @@ class TestAutomobileInit:
 class TestEngine:
     """Tests for start_engine, stop_engine, and is_engine_running."""
 
-    def test_start_engine_returns_true_when_off(self):
+    def test_start_engine_returns_true_when_off(self, car):
         """Starting when off returns True and engine is running."""
-        car = Automobile("Toyota", "Camry", 2023)
         assert car.start_engine() is True
         assert car.is_engine_running is True
 
-    def test_start_engine_returns_false_when_already_running(self):
+    def test_start_engine_returns_false_when_already_running(self, car):
         """Starting when already running returns False."""
-        car = Automobile("Toyota", "Camry", 2023)
         car.start_engine()
         assert car.start_engine() is False
         assert car.is_engine_running is True
 
-    def test_stop_engine_returns_true_when_running(self):
+    def test_stop_engine_returns_true_when_running(self, car):
         """Stopping when running returns True and engine is off."""
-        car = Automobile("Toyota", "Camry", 2023)
         car.start_engine()
         assert car.stop_engine() is True
         assert car.is_engine_running is False
 
-    def test_stop_engine_returns_false_when_already_off(self):
+    def test_stop_engine_returns_false_when_already_off(self, car):
         """Stopping when already off returns False."""
-        car = Automobile("Toyota", "Camry", 2023)
         assert car.stop_engine() is False
         assert car.is_engine_running is False
 
-    def test_start_stop_cycle(self):
+    def test_start_stop_cycle(self, car):
         """Multiple start/stop cycles behave correctly."""
-        car = Automobile("Toyota", "Camry", 2023)
         assert car.start_engine() is True
         assert car.stop_engine() is True
         assert car.start_engine() is True
@@ -92,62 +107,54 @@ class TestEngine:
 class TestRefuel:
     """Tests for refuel()."""
 
-    def test_refuel_adds_up_to_capacity(self):
+    def test_refuel_adds_up_to_capacity(self, car_with_partial_tank):
         """Refuel adds only up to capacity and returns amount added."""
-        car = Automobile("Toyota", "Camry", 2023, fuel_capacity=15.0, fuel_level=5.0)
-        added = car.refuel(20.0)
+        added = car_with_partial_tank.refuel(20.0)
         assert added == 10.0
-        assert car.fuel_level == 15.0
+        assert car_with_partial_tank.fuel_level == 15.0
 
-    def test_refuel_partial_adds_correctly(self):
+    def test_refuel_partial_adds_correctly(self, car_with_partial_tank):
         """Refuel with less than space adds that amount."""
-        car = Automobile("Toyota", "Camry", 2023, fuel_capacity=15.0, fuel_level=5.0)
-        added = car.refuel(3.0)
+        added = car_with_partial_tank.refuel(3.0)
         assert added == 3.0
-        assert car.fuel_level == 8.0
+        assert car_with_partial_tank.fuel_level == 8.0
 
-    def test_refuel_zero_adds_nothing(self):
+    def test_refuel_zero_adds_nothing(self, car_with_partial_tank):
         """Refuel with 0 adds 0."""
-        car = Automobile("Toyota", "Camry", 2023, fuel_capacity=15.0, fuel_level=5.0)
-        added = car.refuel(0)
+        added = car_with_partial_tank.refuel(0)
         assert added == 0.0
-        assert car.fuel_level == 5.0
+        assert car_with_partial_tank.fuel_level == 5.0
 
-    def test_refuel_negative_adds_nothing(self):
+    def test_refuel_negative_adds_nothing(self, car_with_partial_tank):
         """Refuel with negative amount adds 0 (capped by max(0, space))."""
-        car = Automobile("Toyota", "Camry", 2023, fuel_capacity=15.0, fuel_level=5.0)
-        added = car.refuel(-5.0)
+        added = car_with_partial_tank.refuel(-5.0)
         assert added == 0.0
-        assert car.fuel_level == 5.0
+        assert car_with_partial_tank.fuel_level == 5.0
 
-    def test_refuel_full_tank_returns_zero(self):
+    def test_refuel_full_tank_returns_zero(self, car_with_full_tank):
         """When tank is full, refuel returns 0."""
-        car = Automobile("Toyota", "Camry", 2023, fuel_capacity=15.0, fuel_level=15.0)
-        added = car.refuel(10.0)
+        added = car_with_full_tank.refuel(10.0)
         assert added == 0.0
-        assert car.fuel_level == 15.0
+        assert car_with_full_tank.fuel_level == 15.0
 
 
 class TestAddMileage:
     """Tests for add_mileage()."""
 
-    def test_add_mileage_positive(self):
+    def test_add_mileage_positive(self, car_with_positive_mileage):
         """Positive miles are added to mileage."""
-        car = Automobile("Toyota", "Camry", 2023, mileage=10000.0)
-        car.add_mileage(500.5)
-        assert car.mileage == 10500.5
+        car_with_positive_mileage.add_mileage(500.5)
+        assert car_with_positive_mileage.mileage == 600.5
 
-    def test_add_mileage_zero(self):
+    def test_add_mileage_zero(self, car_with_positive_mileage):
         """Adding 0 leaves mileage unchanged."""
-        car = Automobile("Toyota", "Camry", 2023, mileage=10000.0)
-        car.add_mileage(0)
-        assert car.mileage == 10000.0
+        car_with_positive_mileage.add_mileage(0)
+        assert car_with_positive_mileage.mileage == 100.0
 
-    def test_add_mileage_negative_ignored(self):
+    def test_add_mileage_negative_ignored(self, car_with_positive_mileage):
         """Negative miles do not change mileage."""
-        car = Automobile("Toyota", "Camry", 2023, mileage=10000.0)
-        car.add_mileage(-100.0)
-        assert car.mileage == 10000.0
+        car_with_positive_mileage.add_mileage(-100.0)
+        assert car_with_positive_mileage.mileage == 100.0
 
 
 class TestStringRepresentations:
