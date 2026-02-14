@@ -22,8 +22,10 @@ class BookCase:
         
 
 if __name__ == '__main__':
-    from books import BookCase
+    from books_classmethods import BookCase
     
     bc = BookCase.create_bookcase([('Moby Dick', 'Herman Melville'), ('Jungle Book', 'Rudyard Kipling')])
     for book in bc.books:
         print(str(book))
+
+    print(type(bc))
